@@ -12,6 +12,7 @@ public class QuizActivity extends AppCompatActivity {
     private Button mTrueButton;
     private Button mFalseButton;
     private Button mNextButton;
+    private Button mPreviousButton;
     private TextView mQuestionTextView;
 
     private Question[] mQuestionBank = new Question[]{
@@ -68,6 +69,17 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 checkAnswer(false);
+            }
+        });
+        mPreviousButton = (Button) findViewById(R.id.previous_button);
+        mPreviousButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                mCurrentIndex = (mCurrentIndex - 1) % mQuestionBank.length;
+                if (-1 == mCurrentIndex) {
+                    mCurrentIndex = mQuestionBank.length-1;
+                }
+                updateQuestion();
             }
         });
         mNextButton = (Button) findViewById(R.id.next_button);
